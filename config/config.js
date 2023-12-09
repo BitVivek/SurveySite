@@ -12,7 +12,7 @@ export default config*/
 
 const config = {
   env: "development",
-  port: 3000,
+  port: process.env.PORT || 3000,
   jwtSecret: "YOUR_secret_key",
   mongoUri:
     "mongodb+srv://amodi21:harekrishna@cluster0.agnrs5z.mongodb.net/Marketplace?retryWrites=true&w=majority",
