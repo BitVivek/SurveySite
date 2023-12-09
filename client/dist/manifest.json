@@ -1,0 +1,18 @@
+{
+  "public/assets/images/Survey.jpg": {
+    "file": "assets/Survey-58a060a9.jpg",
+    "src": "public/assets/images/Survey.jpg"
+  },
+  "public/assets/images/unicornbikeImg.jpg": {
+    "file": "assets/unicornbikeImg-0c686699.jpg",
+    "src": "public/assets/images/unicornbikeImg.jpg"
+  },
+  "src/main.jsx": {
+    "assets": [
+      "assets/Survey-58a060a9.jpg"
+    ],
+    "file": "assets/main-9ba2de2f.js",
+    "isEntry": true,
+    "src": "src/main.jsx"
+  }
+}

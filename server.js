@@ -3,7 +3,6 @@ const path = require("path");
 const app = express();
 const assetsRouter = require("./server/assets-router");
 app.use("/src", assetsRouter);
-app.use("/", express.static(path.join(__dirname, "public")));
 app.get("/api/v1", (req, res) => {
   res.json({
     project: "React and Express Boilerplate",
@@ -36,6 +35,13 @@ console.info('Server started on port %s.', config.port)
 import config from './config/config.js' 
 import app from './server/express.js'
 import mongoose from 'mongoose' 
+import path from 'path'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import express from 'express'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 mongoose.Promise = global.Promise
 mongoose.connect(config.mongoUri, { useNewUrlParser: true,
 //useCreateIndex: true, 
@@ -45,9 +51,20 @@ useUnifiedTopology: true } )
 console.log("Connected to the database!");
 })
 
+
 mongoose.connection.on('error', () => {
 throw new Error(`unable to connect to database: ${config.mongoUri}`) 
 })
+
+app.use(express.static(path.join(__dirname, 'client/dist')));
+
+app.use("/", express.static(path.join(__dirname, "public")));
+
+app.get("/*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+})
+
+
 /*
 app.get("/", (req, res) => {
 res.json({ message: "Welcome to User application." });
