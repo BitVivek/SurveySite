@@ -11,6 +11,11 @@ import {list} from './api-shop.js'
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
+  body:{
+    padding: theme.spacing(3, 2.5, 2),
+    background: 'linear-gradient(to bottom, #8bc1e8, #6eb3e6)',
+    height: '100vh'
+  },
   root: theme.mixins.gutters({
     maxWidth: 600,
     margin: 'auto',
@@ -19,10 +24,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(3)
   }),
   title: {
-    margin: `${theme.spacing(3)}px 0 ${theme.spacing(2)}px`,
-    color: theme.palette.protectedTitle,
+    padding: theme.spacing(3, 2.5, 2),
+    color: theme.palette.primary.dark,
+    textShadow: '1px 2px 3px rgba(0, 0, 0, 0.3)',
     textAlign: 'center',
-    fontSize: '1.2em'
+    fontSize: 35,
   },
   avatar:{
     width: 100,
@@ -60,10 +66,10 @@ export default function Shops(){
   }, [])
 
     return (
-    <div>
+    <div className={classes.body}>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          All Survey Site
+          All Surveys
         </Typography>
         <List dense>
           {shops.map((shop, i) => {

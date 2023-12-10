@@ -12,19 +12,29 @@ import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: 600,
-    margin: 'auto',
-    textAlign: 'center',
-    marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2)
+  body:{
+    padding: theme.spacing(3, 2.5, 2),
+    background: 'linear-gradient(to bottom, #8bc1e8, #6eb3e6)',
+    height: '100vh'
   },
+  card: {
+    maxWidth: 400,
+     margin: '0 auto',
+     marginTop: theme.spacing(3),
+     padding: theme.spacing(2),
+     textAlign: 'center',
+     borderRadius: '18px',
+     boxShadow: 3,
+   },
   error: {
     verticalAlign: 'middle'
   },
   title: {
-    marginTop: theme.spacing(2),
-    color: theme.palette.openTitle
+    padding: theme.spacing(3, 2.5, 2),
+    color: theme.palette.primary.dark,
+    textShadow: '1px 2px 3px rgba(0, 0, 0, 0.3)',
+    textAlign: 'center',
+    fontSize: 35,
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -78,6 +88,7 @@ export default function Signin(props) {
   }
 
   return (
+    <div className={classes.body}>
       <Card className={classes.card}>
         <CardContent>
           <Typography variant="h5" className={classes.title}>
@@ -96,6 +107,7 @@ export default function Signin(props) {
         <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
         </CardActions>
       </Card>
+      </div>
     )
 }
 

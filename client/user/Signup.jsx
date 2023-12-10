@@ -16,30 +16,40 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
+  body:{
+    padding: theme.spacing(3, 2.5, 2),
+    background: 'linear-gradient(to bottom, #8bc1e8, #6eb3e6)',
+    height: '100vh'
+  },
   card: {
-    maxWidth: 600,
-    margin: 'auto',
+   maxWidth: 400,
+    margin: '0 auto',
+    marginTop: theme.spacing(3),
+    padding: theme.spacing(2),
     textAlign: 'center',
-    marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2)
-  },
-  error: {
-    verticalAlign: 'middle'
-  },
-  title: {
-    marginTop: theme.spacing(2),
-    color: theme.palette.openTitle
+    borderRadius: '18px',
+    boxShadow: 3,
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300
+    width: '100%',
+    marginBottom: theme.spacing(2),
+  },
+  error: {
+    color: 'red',
   },
   submit: {
-    margin: 'auto',
-    marginBottom: theme.spacing(2)
-  }
-}))
+    margin: '0 auto',
+    marginBottom: theme.spacing(2),
+  },
+  title: {
+    padding: theme.spacing(3, 2.5, 2),
+    color: theme.palette.openTitle,
+    textShadow: '1px 2px 3px rgba(0, 0, 0, 0.3)',
+    textAlign: 'center',
+    fontSize: 35,
+    color: theme.palette.primary.dark
+  },
+}));
 
 export default function Signup() {
   const classes = useStyles()
@@ -69,7 +79,7 @@ export default function Signup() {
       }
     })
   }   
-    return (<div>
+    return (<div className={classes.body}>
       <Card className={classes.card}>
         <CardContent>
           <Typography variant="h6" className={classes.title}>
