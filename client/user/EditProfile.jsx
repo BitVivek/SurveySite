@@ -153,17 +153,19 @@ export default function EditProfile({ match }) {
         <Typography variant="subtitle1" className={classes.subheading}>
           Provider Account
         </Typography>
-        {/* <FormControlLabel
-            control={
-              <Switch classes={{
-                                checked: classes.checked,
-                                bar: classes.bar,
-                              }}
-                      checked={values.seller}
-                      onChange={handleCheck}
-              />}
-            label={values.seller? 'Active' : 'Inactive'}
-          /> */}
+        <FormControlLabel
+          control={
+            <Switch
+              classes={{
+                checked: classes.checked,
+                bar: classes.bar,
+              }}
+              checked={values.seller}
+              onChange={handleCheck}
+            />
+          }
+          label={values.seller ? "Active" : "Inactive"}
+        />
         <br />{" "}
         {values.error && (
           <Typography component="p" color="error">
