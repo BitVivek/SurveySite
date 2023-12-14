@@ -14,6 +14,8 @@ import {read, update} from './api-shop.js'
 import {Redirect} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import MyProducts from './../product/MyProducts'
+import MMySurveys from './../survey/MySurveys.jsx'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -161,6 +163,7 @@ export default function EditShop ({match}) {
           </Grid>
           <Grid item xs={6} sm={6}>
             <MyProducts shopId={match.params.shopId}/>
+            <M />
           </Grid>
         </Grid>
     </div>)
