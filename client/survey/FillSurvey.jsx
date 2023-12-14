@@ -119,17 +119,14 @@ export default function FillSurvey() {
 
     try {
       // Send a POST request to your server endpoint
-      const response = await fetch(
-        "http://localhost:3000/surveys/submit/survey",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Include authorization headers if needed
-          },
-          body: JSON.stringify(responseData),
-        }
-      );
+      const response = await fetch("/surveys/submit/survey", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Include authorization headers if needed
+        },
+        body: JSON.stringify(responseData),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/surveys'; // Adjust this based on your actual API endpoint
+const BASE_URL = '/surveys'; // Adjust this based on your actual API endpoint
 
 export const createQuestion = async (questionData) => {
   // Send POST request to create question
