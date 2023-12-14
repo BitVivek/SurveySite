@@ -1,24 +1,52 @@
-import axios from 'axios';
+const BASE_URL = 'http://localhost:3000/surveys'; // Adjust this based on your actual API endpoint
 
-const BASE_URL = '/surveys'; // Adjust this based on your actual API endpoint
+export const createQuestion = async (questionData) => {
+  // Send POST request to create question
+  const response = await fetch(`${BASE_URL}/questions`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(questionData)
+  });
 
-export const createSurvey = async (surveyData) => {
-  try {
-    const response = await axios.post(`${BASE_URL}`, surveyData);
-    return response.data;
-  } catch (error) {
-    // Handle error
-    console.error('Error creating survey:', error);
-    throw error;
-  }
-};
+  if (!response.ok) throw new Error(`Question creation failed: ${response.statusText}`);
+
+  const createdQuestion = await response.json();
+  return createdQuestion._id; // Return the ID of the created question
+}
+
+export const createSurvey = async  (surveyData, questionIds, userId) => {
+  // Include question IDs and userId in survey data
+  surveyData.questions = questionIds;
+  surveyData.userId = userId;
+  console.log(surveyData)
+  console.log(questionIds)
+  // Send POST request to create survey
+  const response = await fetch(`${BASE_URL}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(surveyData)
+  });
+
+  if (!response.ok) throw new Error(`Survey creation failed: ${response.statusText}`);
+
+  const createdSurvey = await response.json();
+  return createdSurvey; // Return the created survey object
+}
 
 export const listSurveysByUser = async (userId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${userId}`);
-    return response.data;
+    let response = await fetch(`${BASE_URL}/${userId}`, {
+      method: 'GET'
+    });
+    if (!response.ok) throw new Error('Network response was not ok.');
+    return await response.json();
   } catch (error) {
-    // Handle error
     console.error('Error fetching surveys:', error);
     throw error;
   }
@@ -26,10 +54,13 @@ export const listSurveysByUser = async (userId) => {
 
 export const getSurvey = async (surveyId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/detail/${surveyId}`);
-    return response.data;
+    let response = await fetch(`${BASE_URL}/detail/${surveyId}`, {
+      method: 'GET'
+    });
+    if (!response.ok) throw new Error('Network response was not ok.');
+    console.log(response)
+    return await response.json();
   } catch (error) {
-    // Handle error
     console.error('Error fetching survey:', error);
     throw error;
   }
@@ -37,10 +68,17 @@ export const getSurvey = async (surveyId) => {
 
 export const updateSurvey = async (surveyId, surveyData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/${surveyId}`, surveyData);
-    return response.data;
+    let response = await fetch(`${BASE_URL}/${surveyId}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(surveyData)
+    });
+    if (!response.ok) throw new Error('Network response was not ok.');
+    return await response.json();
   } catch (error) {
-    // Handle error
     console.error('Error updating survey:', error);
     throw error;
   }
@@ -48,11 +86,62 @@ export const updateSurvey = async (surveyId, surveyData) => {
 
 export const deleteSurvey = async (surveyId) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/${surveyId}`);
-    return response.data;
+    let response = await fetch(`${BASE_URL}/${surveyId}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) throw new Error('Network response was not ok.');
+    return await response.json();
   } catch (error) {
-    // Handle error
     console.error('Error deleting survey:', error);
+    throw error;
+  }
+};
+
+
+export const getQuestionById = async (questionid) => {
+  try {
+    let response = await fetch(`${BASE_URL}/questions/${questionid}`, {
+      method: 'GET'
+    });
+    if (!response.ok) throw new Error('Network response was not ok.');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching survey:', error);
+    throw error;
+  }
+};
+
+export const fetchSurveyResponses = async (surveyId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/responses/${surveyId}`);
+    console.log("responsess")
+    console.log(response);
+    console.log("############")
+    if (!response.ok) throw new Error('Network response was not ok.');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching survey responses:', error);
+    throw error;
+  }
+};
+
+export const listSurveys = async (signal) => {
+  try {
+    const response = await fetch(`${BASE_URL}`, {
+      method: 'GET',
+      signal: signal,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.error("Error fetching surveys:", error);
     throw error;
   }
 };

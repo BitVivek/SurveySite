@@ -56,13 +56,13 @@ mongoose.connection.on('error', () => {
 throw new Error(`unable to connect to database: ${config.mongoUri}`) 
 })
 
-// app.use(express.static(path.join(__dirname, 'client/dist')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 
-// app.use("/", express.static(path.join(__dirname, "public")));
+app.use("/", express.static(path.join(__dirname, "public")));
 
-// app.get("/*", (_req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// })
+app.get("/*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+})
 
 
 /*

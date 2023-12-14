@@ -13,7 +13,7 @@ const createSurvey = async (req, res) => {
 
 const getAllSurveys = async (req, res) => {
   try {
-    const surveys = await Survey.find().populate('questions');
+    const surveys = await Survey.find();
     res.json(surveys);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -22,7 +22,7 @@ const getAllSurveys = async (req, res) => {
 
 const getSurvey = async (req, res) => {
   try {
-    const survey = await Survey.findById(req.params.id).populate('questions');
+    const survey = await Survey.find({userId: req.params.id});
     if (!survey) return res.status(404).send('Survey not found');
     res.json(survey);
   } catch (error) {
@@ -30,6 +30,15 @@ const getSurvey = async (req, res) => {
   }
 };
 
+const getSurveybyID = async (req, res) => {
+  try {
+    const survey = await Survey.findById(req.params.id);
+    if (!survey) return res.status(404).send('Survey not found');
+    res.json(survey);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 const updateSurvey = async (req, res) => {
   try {
     const survey = await Survey.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -50,4 +59,4 @@ const deleteSurvey = async (req, res) => {
   }
 };
 
-export { createSurvey, getAllSurveys, getSurvey, updateSurvey, deleteSurvey };
+export { createSurvey, getAllSurveys, getSurvey, updateSurvey, deleteSurvey, getSurveybyID};
